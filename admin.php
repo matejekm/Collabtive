@@ -5,6 +5,7 @@ $action = getArrayVal($_GET, "action");
 $mode = getArrayVal($_GET, "mode");
 $id = getArrayVal($_GET, "id");
 $name = getArrayVal($_POST, "name");
+$realname = getArrayVal($_POST, "realname");
 $subtitle = getArrayVal($_POST, "subtitle");
 $isadmin = getArrayVal($_POST, "isadmin");
 $email = getArrayVal($_POST, "email");
@@ -45,7 +46,8 @@ $template->assign("languages", $languages);
 
 $user = new user();
 $project = new project();
-$company = new company();
+# same variable for multiple use - I'll fix that later
+#$company = new company();
 $theset = new settings();
 $mainclasses = array("desktop" => "",
     "profil" => "",
@@ -118,7 +120,7 @@ if ($action == "index") {
     }
     $sysloc = $settings["locale"];
 
-    $newid = $user->add($name, $email, $company, $pass, $sysloc, $tags, $rate);
+    $newid = $user->add($name, $realname, $email, $company, $pass, $sysloc, $tags, $rate);
     if ($newid) {
         if (!empty($assignto)) {
             foreach ($assignto as $proj) {

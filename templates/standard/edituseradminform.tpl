@@ -50,8 +50,15 @@
 														<td class="right"><input type = "text" class="text" value = "{$user.name}" name = "name" id="name" required="1" realname="{#name#}" tabindex="1" /></td>
 													</tr>
 												</tbody>
-
-												<tbody class="color-b">
+                                                
+                                                <tbody class="color-a">
+													<tr>
+														<td><label for = "name">{#realname#}:</label></td>
+														<td class="right"><input type = "text" class="text" value = "{$user.realname}" name = "name" id="name" required="1" realname="{#realname#}" tabindex="1" /></td>
+													</tr>
+												</tbody>
+												
+                                                <tbody class="color-b">
 													<tr>
 														<td><label for = "avatar">{#avatar#}:</label></td>
 														<td class="right">

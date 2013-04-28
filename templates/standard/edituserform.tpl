@@ -5,7 +5,7 @@
 <div id="content-left-in">
 <div class="user">
 
-<h1>{#edituser#}<span>/ {$user.name}</span></h1>
+<h1>{#edituser#}<span>/ {$user.realname}</span></h1>
 
 <div class="userwrapper">
 <form novalidate class="main" method="post" action="manageuser.php?action=edit" enctype="multipart/form-data" {literal}onsubmit="return validateCompleteForm(this,'input_error');"{/literal}>
@@ -53,8 +53,15 @@
 						<td class="right"><input type = "text" class="text" value = "{$user.name}" name = "name" id="name" required="1" realname="{#name#}" tabindex="1" /></td>
 					</tr>
 				</tbody>
-
-				<tbody class="color-b">
+                
+                <tbody class="color-a">
+					<tr>
+						<td><label for = "realname">{#realname#}:</label></td>
+						<td class="right"><input type = "text" class="text" value = "{$user.realname}" name = "realname" id="realname" required="1" realname="{#realname#}" tabindex="1" /></td>
+					</tr>
+				</tbody>
+				
+                <tbody class="color-b">
 					<tr>
 						<td><label for = "avatar">{#avatar#}:</label></td>
 						<td class="right">
@@ -70,8 +77,8 @@
 						</td>
 					</tr>
 				</tbody>
-
-				<tbody class="color-a">
+				
+                <tbody class="color-a">
 					<tr>
 						<td></td>
 						<td class="right"></td>

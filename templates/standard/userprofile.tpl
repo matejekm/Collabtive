@@ -5,7 +5,7 @@
 	<div id="content-left-in">
 		<div class="user">
 
-			<h1>{#userprofile#}<span>/ {$user.name}</span></h1>
+			<h1>{#userprofile#}<span>/ {$user.realname}</span></h1>
 
 			<div class="export-main">
 				<a class="export"><span>{#export#}</span></a>

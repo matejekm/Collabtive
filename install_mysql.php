@@ -183,7 +183,8 @@
         $table14 = $conn->query("
 CREATE TABLE `user` (
   `ID` int(10)  auto_increment,
-  `name` varchar(255) default '',
+  `name` varchar(255) NOT NULL UNIQUE,
+  `realname` varchar(255) default '',
   `email` varchar(255) default '',
   `tel1` varchar(255),
   `tel2` varchar(255) ,

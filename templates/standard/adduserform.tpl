@@ -3,8 +3,12 @@
 		<fieldset>
 
 			<div class="row">
-				<label for="name">{#name#}:</label>
-				<input type="text" name="name" id="name" required="1" realname="{#name#}" />
+				<label for="name">{#user#}:</label>
+				<input type="text" name="name" id="name" required="1" realname="{#user#}" />
+			</div>
+			<div class="row">
+				<label for="realname">{#realname#}:</label>
+				<input type="text" name="realname" id="realname" required="1" realname="{#realname#}" />
 			</div>
 			<div class="row">
 				<label for="company">{#company#}:</label>

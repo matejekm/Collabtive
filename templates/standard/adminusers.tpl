@@ -103,9 +103,9 @@
 												<tr>
 													<td colspan="3">
 														<span class="name">
-															<a href = "manageuser.php?action=profile&amp;id={$users[user].ID}" title="{$users[user].name}">
-																{if $users[user].name != ""}
-																	{$users[user].name|truncate:13:"...":true}
+															<a href = "manageuser.php?action=profile&amp;id={$users[user].ID}" title="{$users[user].realname}">
+																{if $users[user].realname != ""}
+																	{$users[user].realname|truncate:13:"...":true}
 																{else}
 																	{#user#}
 																{/if}

@@ -25,6 +25,7 @@ class user {
      * Creates a user
      *
      * @param string $name Name of the member
+     * @param string $realname realname
      * @param string $email E-mail address of the member
      * @param string $company Company of the member
      * @param string $pass Password
@@ -32,13 +33,13 @@ class user {
      * @param float $rate Hourly rate
      * @return int $insid ID of the newly created member
      */
-    function add($name, $email, $company, $pass, $locale = "", $tags = "", $rate = 0.0)
+    function add($name, $realname, $email, $company, $pass, $locale = "", $tags = "", $rate = 0.0)
     {
         global $conn;
         $pass = sha1($pass);
 
-        $ins1Stmt = $conn->prepare("INSERT INTO user (name,email,company,pass,locale,tags,rate) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $ins1 = $ins1Stmt->execute(array($name, $email, $company, $pass, $locale, $tags, $rate));
+        $ins1Stmt = $conn->prepare("INSERT INTO user (name,realname,email,company,pass,locale,tags,rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $ins1 = $ins1Stmt->execute(array($name, $realname, $email, $company, $pass, $locale, $tags, $rate));
 
         if ($ins1) {
             $insid = $conn->lastInsertId();
@@ -77,11 +78,11 @@ class user {
         $id = (int) $id;
 
         if ($avatar != "") {
-            $updStmt = $conn->prepare("UPDATE user SET name=?, email=?, tel1=?, tel2=?, company=?, zip=?, gender=?, url=?, adress=?, adress2=?, state=?, country=?, tags=?, locale=?, avatar=?, rate=? WHERE ID = ?");
-            $upd = $updStmt->execute(array($name, $email, $tel1, $tel2, $company, $zip, $gender, $url, $address1, $address2, $state, $country, $tags, $locale, $avatar, $rate, $id));
+            $updStmt = $conn->prepare("UPDATE user SET name=?, realname=?, email=?, tel1=?, tel2=?, company=?, zip=?, gender=?, url=?, adress=?, adress2=?, state=?, country=?, tags=?, locale=?, avatar=?, rate=? WHERE ID = ?");
+            $upd = $updStmt->execute(array($name, $realname, $email, $tel1, $tel2, $company, $zip, $gender, $url, $address1, $address2, $state, $country, $tags, $locale, $avatar, $rate, $id));
         } else {
-            $updStmt = $conn->prepare("UPDATE user SET name=?, email=?, tel1=?, tel2=?, company=?, zip=?, gender=?, url=?, adress=?, adress2=?, state=?, country=?, tags=?, locale=?, rate=? WHERE ID = ?");
-            $upd = $updStmt->execute(array($name, $email, $tel1, $tel2, $company, $zip, $gender, $url, $address1, $address2, $state, $country, $tags, $locale, $rate, $id));
+            $updStmt = $conn->prepare("UPDATE user SET name=?, realname=?, email=?, tel1=?, tel2=?, company=?, zip=?, gender=?, url=?, adress=?, adress2=?, state=?, country=?, tags=?, locale=?, rate=? WHERE ID = ?");
+            $upd = $updStmt->execute(array($name, $realname, $email, $tel1, $tel2, $company, $zip, $gender, $url, $address1, $address2, $state, $country, $tags, $locale, $rate, $id));
         }
 
         if ($upd) {
@@ -237,6 +238,7 @@ class user {
         $profile = $sel->fetch();
         if (!empty($profile)) {
             $profile["name"] = stripslashes($profile["name"]);
+            $profile["realname"] = stripslashes($profile["realname"]);
             if (isset($profile["company"])) {
                 $profile["company"] = stripslashes($profile["company"]);
             }
@@ -454,7 +456,8 @@ class user {
         $users = array();
 
         while ($user = $sel->fetch()) {
-            $user["name"] = stripslashes($user["name"]);
+            # quick and dirty hack
+            $user["name"] = stripslashes($user["realname"]);
             $user["company"] = stripslashes($user["company"]);
             $user["adress"] = stripslashes($user["adress"]);
             $user["adress2"] = stripslashes($user["adress2"]);
