@@ -14,13 +14,14 @@ Client:
     1. Unpack the archive.
     2. Upload everything, including the empty /files and /templates_c folders, to your server.
 	   (Optionally you need to create /templates_c and /files manually before installation.)
-	3. Make the following folders & files writable:
+    3. Create config.php by copying or renaming /config/standard/config.php.sample
+	4. Make the following folders & files writable:
 		- /templates_c
 		- /files
 		- /config/standard/config.php
-	4. Create a new MySQL database for Collabtive.
-	5. Point your browser to install.php and follow the instructions given.
-	6. If the installation was successful, delete install.php and update.php.
+	5. Create a new MySQL database for Collabtive.
+	6. Point your browser to install.php and follow the instructions given.
+	7. If the installation was successful, delete install.php and update.php.
 
 
 ### Update instructions ###
