@@ -93,7 +93,7 @@ if (!$action) {
     $pass = $_POST['pass'];
     // create the first user
     $usr = new user();
-    $usrid = $usr->add($user, "", 0, $pass);
+    $usrid = $usr->add($user, "Admin", "", 0, $pass);
     if (!$usrid) {
         $template->assign("errortext", "Error: Failed to create first user.");
         $template->display("error.tpl");

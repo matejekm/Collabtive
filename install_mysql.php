@@ -183,7 +183,7 @@
         $table14 = $conn->query("
 CREATE TABLE `user` (
   `ID` int(10)  auto_increment,
-  `name` varchar(255) NOT NULL UNIQUE,
+  `name` varchar(255) NOT NULL,
   `realname` varchar(255) default '',
   `email` varchar(255) default '',
   `tel1` varchar(255),
@@ -204,6 +204,7 @@ CREATE TABLE `user` (
   `rate` varchar(10) ,
   PRIMARY KEY  (`ID`),
   UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `realname` (`name`),
   KEY `pass` (`pass`),
   KEY `locale` (`locale`)
 ) ENGINE=MyISAM");
