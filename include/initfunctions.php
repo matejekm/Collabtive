@@ -20,7 +20,10 @@ function chkproject($user, $project)
 
     $chk = $chk[0];
 
-    if ($chk != "") {
+    $grp = @$conn->query("SELECT role FROM roles_assigned WHERE user = $user")->fetch();
+    $grp = $grp[0];
+
+    if ($grp == 1 || $chk != "") {
         return true;
     } else {
         return false;
