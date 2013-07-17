@@ -11,7 +11,7 @@
             
 			<form class = "main" name = "adminuser" method = "post" enctype="multipart/form-data" action = "install.php?action=step3">
 				<fieldset>
-					<div class = "row"><label for = "username">{#name#}:</label><input type = "text" name = "name" id = "username" /></div>
+					<div class = "row"><label for = "username">{#username#}:</label><input type = "text" name = "name" id = "username" /></div>
 					<div class = "row"><label for = "pass">{#password#}:</label><input type = "password" name = "pass" id = "pass" /></div>
 				</fieldset>
 				<br />
