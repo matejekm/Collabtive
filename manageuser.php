@@ -83,7 +83,7 @@ if ($action == "loginerror") {
     // Login Error
     else {
         $template->assign("loginerror", 1);
-		$template->assign("mailnotify", $settings["mailnotify"]);
+        $template->assign("mailnotify", $settings["mailnotify"]);
         $template->display("login.tpl");
     }
 } elseif ($action == "logout") {
@@ -99,15 +99,15 @@ if ($action == "loginerror") {
     foreach($languages as $lang) {
         $fin = countLanguageStrings($lang);
 
-    	if (!($langfile[$lang] == "")) {
-        	$lang2 = $langfile[$lang];
-		} else {
-			$lang2 = $lang;
-		}
+        if (!($langfile[$lang] == "")) {
+            $lang2 = $langfile[$lang];
+        } else {
+            $lang2 = $lang;
+        }
 
         $lang2 .= " (" . $fin . "%)";
         $fin = array("val" => $lang, "str" => $lang2);
-        
+
         array_push($languages_fin, $fin);
     }
     $template->assign("languages_fin", $languages_fin);
@@ -142,6 +142,12 @@ if ($action == "loginerror") {
             header("Location: $loc");
             die();
         }
+        // don't upload php scripts
+        if ($erweiterung == "php" or $erweiterung == "pl") {
+            $loc = $url . "manageuser.php?action=profile&id=$userid";
+            header("Location: $loc");
+            die();
+        }
 
         for ($i = 0; $i < $workteile; $i++) {
             $subname .= $teilnamen[$i];
@@ -166,7 +172,7 @@ if ($action == "loginerror") {
             $avatar = $fname;
         }
 
-        if ($user->edit($userid, $name, $realname, $email, $tel1, $tel2, $company, $zip, $gender, $turl, $address1, $address2, $state, $country, "", $locale, $avatar, 0)) {
+        if ($user->edit($userid, $name, $realname, $email, $tel1, $tel2, "", $zip, $gender, $turl, $address1, $address2, $state, $country, "", $locale, $avatar, 0)) {
             if (!empty($oldpass) and !empty($newpass) and !empty($repeatpass)) {
                 $user->editpass($userid, $oldpass, $newpass, $repeatpass);
             }
@@ -183,6 +189,14 @@ if ($action == "loginerror") {
         }
     }
 } elseif ($action == "del") {
+    if (!$userpermissions["admin"]["add"]) {
+        $errtxt = $langfile["nopermission"];
+        $noperm = $langfile["accessdenied"];
+        $template->assign("errortext", "$errtxt<br>$noperm");
+        $template->assign("mode", "error");
+        $template->display("error.tpl");
+        die();
+    }
     if ($user->del($id)) {
         $loc = $url . "admin.php?action=users&mode=deleted";
         header("Location: $loc");

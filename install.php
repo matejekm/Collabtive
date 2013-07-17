@@ -4,7 +4,11 @@ error_reporting(0);
 if (!file_exists("./templates_c") or !is_writable("./templates_c")) {
     die("Required folder templates_c does not exist or is not writable. <br>Please create the folder or make it writable in order to proceed.");
 }
-
+session_start();
+session_destroy();
+session_unset();
+setcookie("PHPSESSID", "");
+date_default_timezone_set("Europe/Berlin");
 require("./init.php");
 $action = getArrayVal($_GET, "action");
 $locale = getArrayVal($_GET, "locale");
@@ -68,13 +72,28 @@ if (!$action) {
     require_once("install_mysql.php");
     // Get the servers default timezone
     $timezone = date_default_timezone_get();
-
     // insert default settings
-    $defSets = array("name" => "Collabtive", "subtitle" => "Projectmanagement", "locale" => $locale, "timezone" => $timezone, "dateformat" => "d.m.Y", "template" => "standard", "mailnotify" => 1, "mailfrom" => "collabtive@localhost", "mailfromname" => "", "mailmethod" => "mail", "mailhost" => "", "mailuser" => "", "mailpass" => "", "rssuser" => "", "rsspass" => "");
+    /*$defSets = array("name" => "Collabtive", "subtitle" => "Projectmanagement", "locale" => $locale, "timezone" => $timezone, "dateformat" => "d.m.Y", "template" => "standard", "mailnotify" => 1, "mailfrom" => "collabtive@localhost", "mailfromname" => "", "mailmethod" => "mail", "mailhost" => "", "mailuser" => "", "mailpass" => "", "rssuser" => "", "rsspass" => "");
     foreach($defSets as $setKey => $setVal) {
         $ins = $conn->query("INSERT INTO settings (`settingsKey`,`settingsValue`) VALUES ('$setKey','$setVal')");
     }
-
+*/
+	$conn->query("INSERT INTO `settings` (`ID`, `settingsKey`, `settingsValue`) VALUES
+(1, 'name', 'Collabtive'),
+(2, 'subtitle', 'Collabtive'),
+(3, 'locale', 'en'),
+(4, 'timezone', '$timezone'),
+(5, 'dateformat', 'd.m.Y'),
+(6, 'template', 'standard'),
+(7, 'mailnotify', '1'),
+(8, 'mailfrom', 'collabtive@localhost'),
+(9, 'mailfromname', ''),
+(10, 'mailmethod', 'mail'),
+(11, 'mailhost', ''),
+(12, 'mailuser', ''),
+(13, 'mailpass', ''),
+(14, 'rssuser', ''),
+(15, 'rsspass', '')");
     if (!$ins) {
         $template->assign("errortext", "Error: Failed to create initial settings.");
         $template->display("error.tpl");
@@ -117,5 +136,4 @@ if (!$action) {
 
     $template->display("install3.tpl");
 }
-
 ?>
