@@ -54,7 +54,7 @@
                                                 <tbody class="color-a">
 													<tr>
 														<td><label for = "name">{#realname#}:</label></td>
-														<td class="right"><input type = "text" class="text" value = "{$user.realname}" name = "name" id="name" required="1" realname="{#realname#}" tabindex="1" /></td>
+														<td class="right"><input type = "text" class="text" value = "{$user.realname}" name = "realname" id="realname" required="1" realname="{#realname#}" tabindex="1" /></td>
 													</tr>
 												</tbody>
 												

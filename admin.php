@@ -230,14 +230,14 @@ if ($action == "index") {
             $avatar = $fname;
         }
 
-        if ($user->edit($id, $name, "" , $email, $tel1, $tel2, "", $zip, $gender, $turl, $address1, $address2, $state, $country, $tags, $locale, $avatar, $rate)) {
+        if ($user->edit($id, $name, $realname , $email, $tel1, $tel2, "", $zip, $gender, $turl, $address1, $address2, $state, $country, $tags, $locale, $avatar, $rate)) {
             if (!empty($newpass) and !empty($repeatpass)) {
                 $user->admin_editpass($id, $newpass, $repeatpass);
             }
             header("Location: admin.php?action=users&mode=edited");
         }
     } else {
-        if ($user->edit($id, $name, "", $email, $tel1, $tel2, $company, $zip, $gender, $turl, $address1, $address2, $state, $country, $tags, $locale, "", $rate)) {
+        if ($user->edit($id, $name, $realname, $email, $tel1, $tel2, $company, $zip, $gender, $turl, $address1, $address2, $state, $country, $tags, $locale, "", $rate)) {
             if (!empty($newpass) and !empty($repeatpass)) {
                 $user->admin_editpass($id, $newpass, $repeatpass);
             }
